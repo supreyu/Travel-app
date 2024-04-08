@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { TouchableOpacity, FlatList, StyleSheet, TextInput, View, Button, ScrollView, Text, Image, Modal, Alert } from 'react-native';
+import { Linking, TouchableOpacity, FlatList, StyleSheet, TextInput, View, Button, ScrollView, Text, Image, Modal, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from 'expo-image-picker';
 import * as Location from 'expo-location';
@@ -294,7 +294,18 @@ export default function AddPost(props) {
             }
         }
     };
-
+    //谷歌地图
+    const openMap = () => {
+        if (location) {
+          const latitude = location.latitude;
+          const longitude = location.longitude;
+          const label = encodeURI(city || "Unknown Location"); // 使用从逆地理编码获取的城市名称或默认值
+          const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}&query_place_id=${label}`;
+          Linking.openURL(url).catch(err => console.error("Couldn't load page", err));
+        } else {
+          alert('Location is not available.');
+        }
+      };
     return (
 
         <SafeAreaView style={styles.safeArea}>
@@ -426,7 +437,9 @@ export default function AddPost(props) {
                         </View>
 
                         {post.location && (
-                            <Text style={styles.location}>Location: {post.city ? `${post.city}  ` : ''}{post.location.latitude}, {post.location.longitude}</Text>
+                            <Text style={styles.location} onPress={openMap}>
+                                Location: {post.city ? `${post.city}  ` : ''}{post.location.latitude}, {post.location.longitude}
+                            </Text>
                         )}
                         <View style={styles.buttonContainer}>
                             {editablePostId === post.id ? (
