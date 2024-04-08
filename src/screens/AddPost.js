@@ -714,7 +714,7 @@ const styles = StyleSheet.create({
     },
     closeVideoButton: {
         position: 'absolute',
-        top: 30,
+        top: 100,
         right: 20,
         backgroundColor: 'rgba(0,0,0,0.6)',
         padding: 10,

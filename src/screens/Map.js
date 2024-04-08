@@ -39,6 +39,13 @@ const Map = ({ posts }) => {
       uri: require('../../assets/5.jpg'), 
       text: 'Londun'
     },
+    {
+      id: '6',
+      latitude: 31.57489,
+      longitude: 120.29627,
+      uri: require('../../assets/6.jpg'), 
+      text: 'Wuxi'
+    },
 
   ];
   console.log('Posts:', posts);
