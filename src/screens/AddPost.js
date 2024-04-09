@@ -47,6 +47,7 @@ export default function AddPost(props) {
         await ImagePicker.requestMediaLibraryPermissionsAsync();
         // 请求相机权限
         await ImagePicker.requestCameraPermissionsAsync();
+        await Contacts.requestPermissionsAsync();
         // 请求地理位置权限
         let { status } = await Location.requestForegroundPermissionsAsync();
         if (status !== 'granted') {
@@ -128,12 +129,10 @@ export default function AddPost(props) {
         const imagesUris = images.map(image => image.uri).filter(uri => !!uri);
 
         if (images.length > 0 && imagesUris.length === 0) {
-            // 如果原始 images 数组不为空，但是提取 uri 后的数组为空，说明有无效的媒体项
             alert('One or more media items are invalid and cannot be saved.');
-            return; // 提前返回，不继续执行后面的保存操作
+            return; 
         }
         const currentTime = new Date();
-        // 创建新帖子对象
         const newPost = {
             text,
             images,

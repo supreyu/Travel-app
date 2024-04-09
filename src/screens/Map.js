@@ -37,7 +37,7 @@ const Map = ({ posts }) => {
       latitude: 51.50335,
       longitude: -0.07940,
       uri: require('../../assets/5.jpg'), 
-      text: 'Londun'
+      text: 'London'
     },
     {
       id: '6',
@@ -68,8 +68,6 @@ const Map = ({ posts }) => {
         console.log('Post with invalid location:', post);
         return null;
       }
-
-    
       return (
         <Marker
           key={index}
